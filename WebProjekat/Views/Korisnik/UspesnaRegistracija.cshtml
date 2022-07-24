@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "UspesnaRegistracija";
+}
+
+<h2>Uspesna regostracija!</h2>
+
+@if (Session["korisnik"] == null)
+{
+    <form action="~/Korisnik/Logovanje">
+        <table>
+            <tr>
+                <td></td>
+                <td><button type="submit">Uloguj se</button></td>
+            </tr>
+        </table>
+    </form>
+}

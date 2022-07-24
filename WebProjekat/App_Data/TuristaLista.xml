@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTurista xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Turista>
+    <Id>51331d64-1c74-4a3e-b45c-529deb17955c</Id>
+    <KorisnickoIme>t1</KorisnickoIme>
+    <Lozinka>pass</Lozinka>
+    <Ime>turista</Ime>
+    <Prezime>turistic</Prezime>
+    <Pol>Muski</Pol>
+    <Email>t@gmail.com</Email>
+    <DatumRodjenja>1985-09-05T00:00:00</DatumRodjenja>
+    <Uloga>Turista</Uloga>
+    <Rezervacije>
+      <Rezervacija>
+        <Id>8e09dff3-4db8-4f4a-af83-c8e25bf7170f</Id>
+        <TuristaId>51331d64-1c74-4a3e-b45c-529deb17955c</TuristaId>
+        <Status>Aktivna</Status>
+        <AranzmanId>bfe991d4-f54a-48ba-aafc-020744d64b09</AranzmanId>
+        <SmestajnaJedinicaId>e162fa19-6a52-49c0-a5c2-f7e1f414469a</SmestajnaJedinicaId>
+        <NazivAranzmana>Hurghada</NazivAranzmana>
+        <LokacijaAranzmana>Egipat</LokacijaAranzmana>
+        <DatumPocetka>7/13/2021 12:00:00 AM</DatumPocetka>
+        <DatumZavrsetka>7/31/2021 12:00:00 AM</DatumZavrsetka>
+        <Cena>650</Cena>
+        <MozeSeOtkazati>false</MozeSeOtkazati>
+        <MozeSeKomentarisati>false</MozeSeKomentarisati>
+        <Komentarisano>false</Komentarisano>
+      </Rezervacija>
+    </Rezervacije>
+    <BrojOtkazivanja>0</BrojOtkazivanja>
+    <Blokiran>false</Blokiran>
+  </Turista>
+</ArrayOfTurista>

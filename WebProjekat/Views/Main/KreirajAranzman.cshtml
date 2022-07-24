@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "KreirajAranzman";
+}
+
+<table>
+    <tr>
+        <td>
+            <form action="~/Main/Index">
+                <button type="submit">Main</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Korisnik/Logout">
+                <button>Logout</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<h2>KreirajAranzman</h2>
+
+@if (Session["korisnik"] != null && ((WebProjekat.Models.Korisnik)Session["korisnik"]).Uloga == WebProjekat.Models.Uloga.Menadzer)
+{
+    WebProjekat.Models.Korisnik korisnik = (WebProjekat.Models.Korisnik)Session["korisnik"];
+
+    <form action="~/Main/KreirajAranzman" method="post">
+        <input type="text" name="MenadzerId" value="@korisnik.Id" hidden />
+        <table>
+            <tr>
+                <td>Naziv</td>
+                <td><input type="text" name="Naziv" /></td>
+            </tr>
+            <tr>
+                <td>Tip</td>
+                <td>
+                    <select class="form-control" id="Tip" name="Tip">
+                        <option value="NocenjeSaDoruckom">Nocenje Sa Doruckom</option>
+                        <option value="Polupansion">Polupansion</option>
+                        <option value="PunPansion">Pun Pansion</option>
+                        <option value="AllInclusive">All Inclusive</option>
+                        <option value="NajamApartmana">Najam Apartmana</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Prevoz</td>
+                <td>
+                    <select class="form-control" id="Prevoz" name="Prevoz">
+                        <option value="Autobus">Autobus</option>
+                        <option value="Avion">Avion</option>
+                        <option value="AutobusAvion">Autobus & Avion</option>
+                        <option value="Individualan">Individualan</option>
+                        <option value="Ostalo">Drugo</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Lokacija</td>
+                <td><input type="text" name="Lokacija" /></td>
+            </tr>
+            <tr>
+                <td>Datum pocetka</td>
+                <td><input type="date" name="DatumPocetka" /></td>
+            </tr>
+            <tr>
+                <td>Datum zavrsetka</td>
+                <td><input type="date" name="DatumZavrsetka" /></td>
+            </tr>
+            <tr>
+                <td>Mesto nalazenja</td>
+                <td><input type="text" name="MestoNalazenjaStr" /></td>
+            </tr>
+            <tr>
+                <td>Vreme nalazenja</td>
+                <td><input type="time" name="VremeNalazenja" /></td>
+            </tr>
+            <tr>
+                <td>Maksimalan broj putnika</td>
+                <td><input type="number" name="MaksimalanBrojPutnika" /></td>
+            </tr>
+            <tr>
+                <td>Opis aranzmana</td>
+                <td><input type="text" name="OpisAranzmana" /></td>
+            </tr>
+            <tr>
+                <td>Opis putovanja</td>
+                <td><input type="text" name="OpisPutovanja" /></td>
+            </tr>
+            <tr>
+                <td>Slika</td>
+                <td><input type="file" name="Slika" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit">Kreiraj</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+}
+else
+{
+    <form action="~/Korisnik/Redirect"></form>
+}
+
+
+

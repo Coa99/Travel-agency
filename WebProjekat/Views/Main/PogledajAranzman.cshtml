@@ -1,0 +1,580 @@
+﻿
+@{
+    ViewBag.Title = "PogledajAranzman";
+}
+@if (Session["korisnik"] == null)
+{
+    <table>
+        <tr>
+            <td>
+                <form action="~/Main/Index">
+                    <button type="submit">Main</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+}
+else
+{
+    <table>
+        <tr>
+            <td>
+                <form action="~/Main/Index">
+                    <button type="submit">Main</button>
+                </form>
+            </td>
+            <td>
+                <form action="~/Korisnik/Logout">
+                    <button>Logout</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+}
+<br />
+<form action="~/Main/PretraziSmestajneJedinice" method="post">
+    <input type="text" name="id" value="@ViewBag.Aranzman.Id" hidden />
+    <table border="1">
+        <tr><td colspan="4"><b>Pretraga smestajnih jedinica</b></td></tr>
+        <tr>
+            <td>Dozvoljen broj gostiju-min</td>
+            <td>Dozvoljen broj gostiju-max</td>
+            <td>Dozvoljen boravak kucnih ljubimaca</td>
+            <td>Cena</td>
+        </tr>
+        <tr>
+            <td><input type="number" name="minBrojGostiju" /></td>
+            <td><input type="number" name="maxBrojGostiju" /></td>
+            <td>
+                <select class="form-control" id="kucniLjubimci" name="kucniLjubimci">
+                    <option value="IskljucenoIzPretrage">IskljucenoIzPretrage</option>
+                    <option value="1">Da</option>
+                    <option value="0">Ne</option>
+                </select>
+            </td>
+            <td><input type="number" name="cena" /></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <button type="submit">Pretrazi</button>
+            </td>
+        </tr>
+    </table>
+</form>
+<br />
+<table border="1">
+    <tr>
+        <td colspan="4"><b>Sortiranje smestajnih jedinica</b></td>
+    </tr>
+    <tr>
+        <td colspan="2">Dozvoljen broj gostiju</td>
+        <td colspan="2">Cena</td>
+    </tr>
+    <tr>
+        <td>
+            <form action="~/Main/SortirajSmestajneJedinice" method="get">
+                <input type="text" name="id" value="@ViewBag.Aranzman.Id" hidden />
+                <input type="text" name="nacin" value="DBG_Rastuce" hidden />
+                <button type="submit">Rastuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Main/SortirajSmestajneJedinice" method="get">
+                <input type="text" name="id" value="@ViewBag.Aranzman.Id" hidden />
+                <input type="text" name="nacin" value="DBG_Opadajuce" hidden />
+                <button type="submit">Opadajuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Main/SortirajSmestajneJedinice" method="get">
+                <input type="text" name="id" value="@ViewBag.Aranzman.Id" hidden />
+                <input type="text" name="nacin" value="cena_Rastuce" hidden />
+                <button type="submit">Rastuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Main/SortirajSmestajneJedinice" method="get">
+                <input type="text" name="id" value="@ViewBag.Aranzman.Id" hidden />
+                <input type="text" name="nacin" value="cena_Opadajuce" hidden />
+                <button type="submit">Opadajuce</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td><h1>Aranzman - @ViewBag.Aranzman.Naziv</h1></td>
+    </tr>
+</table>
+
+
+@if (Session["korisnik"] != null && ((WebProjekat.Models.Korisnik)Session["korisnik"]).Uloga == WebProjekat.Models.Uloga.Menadzer && ((WebProjekat.Models.Korisnik)Session["korisnik"]).Id == ViewBag.Aranzman.MenadzerId)
+{
+<form action="~/Main/IzmeniAranzman" method="post">
+    <input type="text" name="id" value="@ViewBag.Aranzman.Id" hidden />
+    <input type="text" name="Slika" value="@ViewBag.Aranzman.Slika" hidden />
+    <table border="1">
+        <tr>
+            <td>Naziv</td>
+            <td><input type="text" name="Naziv" value="@ViewBag.Aranzman.Naziv" /></td>
+        </tr>
+        <tr>
+            <td>Tip</td>
+            <td><input type="text" name="Tip" value="@ViewBag.Aranzman.Tip" /></td>
+        </tr>
+        <tr>
+            <td>Prevoz</td>
+            <td><input type="text" name="Prevoz" value="@ViewBag.Aranzman.Prevoz" /></td>
+        </tr>
+        <tr>
+            <td>Lokacija</td>
+            <td><input type="text" name="Lokacija" value="@ViewBag.Aranzman.Lokacija" /></td>
+        </tr>
+        <tr>
+            <td>DatumPocetka</td>
+            <td><input type="text" name="DatumPocetka" value="@ViewBag.Aranzman.DatumPocetka" /></td>
+        </tr>
+        <tr>
+            <td>DatumZavrsetka</td>
+            <td><input type="text" name="DatumZavrsetka" value="@ViewBag.Aranzman.DatumZavrsetka" /></td>
+        </tr>
+        <tr>
+            <td>MestoNalazenja</td>
+            <td><input type="text" name="MestoNalazenjaStr" value="@ViewBag.Aranzman.MestoNalazenjaStr" /></td>
+        </tr>
+        <tr>
+            <td>VremeNalazenja</td>
+            <td><input type="text" name="VremeNalazenja" value="@ViewBag.Aranzman.VremeNalazenja" /></td>
+        </tr>
+        <tr>
+            <td>MaksimalanBrojPutnika</td>
+            <td><input type="text" name="MaksimalanBrojPutnika" value="@ViewBag.Aranzman.MaksimalanBrojPutnika" /></td>
+        </tr>
+        <tr>
+            <td>OpisAranzmana</td>
+            <td><input type="text" name="OpisAranzmana" value="@ViewBag.Aranzman.OpisAranzmana" /></td>
+        </tr>
+        <tr>
+            <td>OpisPutovanja</td>
+            <td><input type="text" name="OpisPutovanja" value="@ViewBag.Aranzman.OpisPutovanja" /></td>
+        </tr>
+        <tr>
+            <td>Slika</td>
+            <td><img width="200" src="~/Images/@ViewBag.Aranzman.Slika" /></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Izmeni</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+    <form action="~/Main/ObrisiAranzman" method="post">
+        <input type="text" name="id" value="@ViewBag.Aranzman.Id" hidden />
+        <button type="submit">Obrisi</button>
+    </form>
+
+    <table border="1">
+        <tr><td colspan="3"><b>Komentari</b></td></tr>
+        @foreach (WebProjekat.Models.Komentar komentar in (List<WebProjekat.Models.Komentar>)Session["komentari"])
+        {
+            if (komentar.ApartmanId == ViewBag.Aranzman.Id)
+            {
+                <tr>
+                    <td><b>Komentar: </b> @komentar.Tekst</td>
+                    <td><b>Ocena: </b> @komentar.Ocena</td>
+                    @if (!komentar.Odobren && !komentar.Odbijen)
+                    {
+                        <td>
+                            <form action="~/Rezervacije/OdobriKomentar" method="post">
+                                <input type="text" name="id" value="@komentar.Id" hidden />
+                                <button type="submit">Odobri</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="~/Rezervacije/OdbijKomentar" method="post">
+                                <input type="text" name="id" value="@komentar.Id" hidden />
+                                <button type="submit">Odbij</button>
+                            </form>
+                        </td>
+                    }
+                    @if (komentar.Odobren)
+                    {
+                        <td><b>Odobren</b></td>
+                    }
+                    else if (komentar.Odbijen)
+                    {
+                        <td><b>Odbijen</b></td>
+                    }
+                </tr>
+            }
+        }
+    </table>
+
+    if (@ViewBag.Aranzman.Smestaj == null)
+    {
+        <h3>Nema smestaja za odabran aranzman.</h3>
+
+        <form action="~/Main/KreirajSmestaj" method="post">
+            <input type="text" name="AranzmanId" value="@ViewBag.Aranzman.Id" hidden />
+            <table>
+                <tr>
+                    <td>Naziv</td>
+                    <td><input type="text" name="Naziv" /></td>
+                </tr>
+                <tr>
+                    <td>Tip</td>
+                    <td>
+                        <select class="form-control" id="Tip" name="Tip">
+                            <option value="Hotel">Hotel</option>
+                            <option value="Motel">Motel</option>
+                            <option value="Vila">Vila</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>BrojZvezdica</td>
+                    <td><input type="number" name="BrojZvezdica" /></td>
+                </tr>
+                <tr>
+                    <td>PostojanjeBazena</td>
+                    <td>
+                        <input id="PostojanjeBazena"
+                               name="PostojanjeBazena"
+                               type="checkbox"
+                               value="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>PostojanjeSpaCentra</td>
+                    <td>
+                        <input id="PostojanjeSpaCentra"
+                               name="PostojanjeSpaCentra"
+                               type="checkbox"
+                               value="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>PrilagodjenoZaOsobeSaInvaliditetom</td>
+                    <td>
+                        <input id="PrilagodjenoZaOsobeSaInvaliditetom"
+                               name="PrilagodjenoZaOsobeSaInvaliditetom"
+                               type="checkbox"
+                               value="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>PostojanjeWiFiKonekcije</td>
+                    <td>
+                        <input id="PostojanjeWiFiKonekcije"
+                               name="PostojanjeWiFiKonekcije"
+                               type="checkbox"
+                               value="true" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit">Kreiraj smestaj</button>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+
+    }
+    else
+    {
+        if (@ViewBag.Aranzman.Smestaj.Obrisan == false)
+        {
+            <form action="~/Main/IzmeniSmestaj" method="post">
+                <input type="text" name="id" value="@ViewBag.Aranzman.Smestaj.Id" hidden />
+
+                <h2>Smestaj</h2>
+                <table border="1">
+                    <tr>
+                        <td>Naziv</td>
+                        <td><input type="text" name="Naziv" value="@ViewBag.Aranzman.Smestaj.Naziv" /></td>
+                    </tr>
+                    <tr>
+                        <td>Tip</td>
+                        <td><input type="text" name="Tip" value="@ViewBag.Aranzman.Smestaj.Tip" /></td>
+                    </tr>
+                    <tr>
+                        <td>BrojZvezdica</td>
+                        <td><input type="text" name="BrojZvezdica" value="@ViewBag.Aranzman.Smestaj.BrojZvezdica" /></td>
+                    </tr>
+                    <tr>
+                        <td>PostojanjeBazena</td>
+                        <td><input type="text" name="PostojanjeBazena" value="@ViewBag.Aranzman.Smestaj.PostojanjeBazena" /></td>
+                    </tr>
+                    <tr>
+                        <td>PostojanjeSpaCentra</td>
+                        <td><input type="text" name="PostojanjeSpaCentra" value="@ViewBag.Aranzman.Smestaj.PostojanjeSpaCentra" /></td>
+                    </tr>
+                    <tr><td><button type="submit">Izmeni</button></td></tr>
+                </table>
+            </form>
+            <form action="~/Main/ObrisiSmestaj" method="post">
+                <input type="text" name="id" value="@ViewBag.Aranzman.Smestaj.Id" hidden />
+                <button type="submit">Obrisi</button>
+            </form>
+
+            if (@ViewBag.Aranzman.Smestaj.SmestajneJedinice.Count > 0)
+            {
+                <h2>Smestajne jedinice</h2>
+
+                foreach (var smestaj in (List<WebProjekat.Models.SmestajnaJedinica>)@ViewBag.Aranzman.Smestaj.SmestajneJedinice)
+                {
+                    if (!smestaj.Obrisan)
+                    {
+
+                        if (smestaj.Slobodan)
+                        {
+                            <form action="~/Main/IzmeniSmestajnuJedinicu" method="post">
+                                <input type="text" name="Id" value="@smestaj.Id" hidden />
+                                <table border="1">
+                                    <tr>
+                                        <td>DozvoljenBrojGostiju</td>
+                                        <td><input type="number" name="DozvoljenBrojGostiju" value="@smestaj.DozvoljenBrojGostiju" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>DozvoljenBoravakKucnihLjubimaca</td>
+                                        <td><input type="text" name="DozvoljenBoravakKucnihLjubimaca" value="@smestaj.DozvoljenBoravakKucnihLjubimaca" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cena</td>
+                                        <td><input type="number" name="Cena" value="@smestaj.Cena" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button type="submit">Izmeni</button>
+                                        </td>
+                                    </tr>
+                                    @*<tr>
+                                            <td>
+                                                <form action="~/Main/ObrisiSmestajnuJedinicu" method="post">
+                                                    <input type="text" name="id" value="@smestaj.Id" hidden />
+                                                    <button type="submit">Obrisi</button>
+                                                </form>
+                                            </td>
+                                        </tr>*@
+                                </table>
+
+                            </form>
+                            <form action="~/Main/ObrisiSmestajnuJedinicu" method="post">
+                                <input type="text" name="id" value="@smestaj.Id" hidden />
+                                <button type="submit">Obrisi</button>
+                            </form>
+
+                        }
+                        else
+                        {
+                            <table border="1">
+                                <tr>
+                                    <td>DozvoljenBrojGostiju</td>
+                                    <td><input type="text" name="KorisnickoIme" value="@smestaj.DozvoljenBrojGostiju" /></td>
+                                </tr>
+                                <tr>
+                                    <td>DozvoljenBoravakKucnihLjubimaca</td>
+                                    <td><input type="text" name="KorisnickoIme" value="@smestaj.DozvoljenBoravakKucnihLjubimaca" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Cena</td>
+                                    <td><input type="text" name="KorisnickoIme" value="@smestaj.Cena" /></td>
+                                </tr>
+                                <tr><td>Smestaj je zauzet</td></tr>
+                            </table>
+                        }
+
+                        <br />
+                    }
+                }
+            }
+            else
+            {
+                <h3>Nema smestajnih jedinica</h3>
+            }
+            <form action="~/Main/KreirajSmestajnuJedinicu" method="post">
+                <input type="text" name="SmestajId" value="@ViewBag.Aranzman.Smestaj.Id" hidden />
+                <table>
+                    <tr>
+                        <td>DozvoljenBrojGostiju</td>
+                        <td><input type="number" name="DozvoljenBrojGostiju" /></td>
+                    </tr>
+                    <tr>
+                        <td>DozvoljenBoravakKucnihLjubimaca</td>
+                        <td>
+                            <input id="DozvoljenBoravakKucnihLjubimaca"
+                                   name="DozvoljenBoravakKucnihLjubimaca"
+                                   type="checkbox"
+                                   value="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cena</td>
+                        <td><input type="number" name="Cena" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit">Kreiraj smestajnu jedinicu</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+        }
+        else
+        {
+            <h3>Smestaj je neaktivan.</h3>
+            <h3>Mozete ga ponovo aktivirati.</h3>
+            <form action="~/Main/AktivirajSmestaj" method="post">
+                <input type="text" name="id" value="@ViewBag.Aranzman.Smestaj.Id" hidden />
+                <button type="submit">Aktiviraj smestaj</button>
+            </form>
+
+        }
+    }
+}
+else
+{
+    <table border="1">
+        <tr><td>Naziv</td><td>@ViewBag.Aranzman.Naziv</td></tr>
+        <tr><td>Tip</td><td>@ViewBag.Aranzman.Tip</td></tr>
+        <tr><td>Prevoz</td><td>@ViewBag.Aranzman.Prevoz</td></tr>
+        <tr><td>Lokacija</td><td>@ViewBag.Aranzman.Lokacija</td></tr>
+        <tr><td>DatumPocetka</td><td>@ViewBag.Aranzman.DatumPocetka</td></tr>
+        <tr><td>DatumZavrsetka</td><td>@ViewBag.Aranzman.DatumZavrsetka</td></tr>
+        <tr><td>MestoNalazenja</td><td>@ViewBag.Aranzman.MestoNalazenja</td></tr>
+        <tr><td>VremeNalazenja</td><td>@ViewBag.Aranzman.VremeNalazenja</td></tr>
+        <tr><td>MaksimalanBrojPutnika</td><td>@ViewBag.Aranzman.MaksimalanBrojPutnika</td></tr>
+        <tr><td>OpisAranzmana</td><td>@ViewBag.Aranzman.OpisAranzmana</td></tr>
+        <tr><td>OpisPutovanja</td><td>@ViewBag.Aranzman.OpisPutovanja</td></tr>
+        <tr><td>Slika</td><td><img width="200" src="~/Images/@ViewBag.Aranzman.Slika" /></td></tr>
+        @*@if (Session["korisnik"] != null && ((WebApp.Models.Korisnik)Session["korisnik"]).Uloga == WebApp.Models.Uloga.Menadzer && ((WebApp.Models.Korisnik)Session["korisnik"]).Id == ViewBag.Aranzman.MenadzerId)
+            {
+                <tr><td><button>Izmeni</button></td></tr>
+                <tr><td><button>Obrisi</button></td></tr>
+            }*@
+    </table>
+
+    <br />
+    if (Session["komentari"] != null)
+    {
+        <table border="1">
+            <tr><td colspan="2"><b>Komentari</b></td></tr>
+            @foreach (WebProjekat.Models.Komentar komentar in (List<WebProjekat.Models.Komentar>)Session["komentari"])
+            {
+                if (komentar.ApartmanId == ViewBag.Aranzman.Id)
+                {
+                    if (komentar.Odobren)
+                    {
+                        <tr>
+                            <td><b>Komentar: </b> @komentar.Tekst</td>
+                            <td><b>Ocena: </b> @komentar.Ocena</td>
+                        </tr>
+                    }
+                }
+            }
+        </table>
+    }
+
+
+    if (@ViewBag.Aranzman.Smestaj == null)
+    {
+        <h3>Nema smestaja za odabran aranzman.</h3>
+    }
+    else
+    {
+        if (@ViewBag.Aranzman.Smestaj.Obrisan == false)
+        {
+            <h2>Smestaj</h2>
+            <table border="1">
+                <tr><td>Naziv</td><td>@ViewBag.Aranzman.Smestaj.Naziv</td></tr>
+                <tr><td>Tip</td><td>@ViewBag.Aranzman.Smestaj.Tip</td></tr>
+                <tr><td>BrojZvezdica</td><td>@ViewBag.Aranzman.Smestaj.BrojZvezdica</td></tr>
+                <tr><td>PostojanjeBazena</td><td>@ViewBag.Aranzman.Smestaj.PostojanjeBazena</td></tr>
+                <tr><td>PostojanjeSpaCentra</td><td>@ViewBag.Aranzman.Smestaj.PostojanjeSpaCentra</td></tr>
+                @*@if (Session["korisnik"] != null && ((WebApp.Models.Korisnik)Session["korisnik"]).Uloga == WebApp.Models.Uloga.Menadzer && ((WebApp.Models.Korisnik)Session["korisnik"]).Id == ViewBag.Aranzman.MenadzerId)
+                    {
+                        <tr><td><button>Izmeni</button></td></tr>
+                        <tr>
+                            <td>
+                                <form action="~/Main/ObrisiSmestaj" method="post">
+                                    <input type="text" name="id" value="@ViewBag.Aranzman.Smestaj.Id" hidden />
+                                    <button type="submit">Obrisi</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }*@
+
+            </table>
+
+            if (@ViewBag.Aranzman.Smestaj.SmestajneJedinice.Count > 0)
+            {
+                <h2>Smestajne jedinice</h2>
+
+                foreach (var smestaj in (List<WebProjekat.Models.SmestajnaJedinica>)@ViewBag.Aranzman.Smestaj.SmestajneJedinice)
+                {
+                    if (!smestaj.Obrisan)
+                    {
+                        <table border="1">
+                            <tr><td>DozvoljenBrojGostiju</td><td>@smestaj.DozvoljenBrojGostiju</td></tr>
+                            <tr><td>DozvoljenBoravakKucnihLjubimaca</td><td>@smestaj.DozvoljenBoravakKucnihLjubimaca</td></tr>
+                            <tr><td>Cena</td><td>@smestaj.Cena</td></tr>
+                            @if (smestaj.Slobodan)
+                            {
+                                if (Session["korisnik"] != null && ((WebProjekat.Models.Korisnik)Session["korisnik"]).Uloga == WebProjekat.Models.Uloga.Turista)
+                                {
+                                    <tr>
+                                        <td>
+                                            <form action="~/Rezervacije/Rezervisi" method="post">
+                                                <input type="text" name="AranzmanId" value="@ViewBag.Aranzman.Id" hidden />
+                                                <input type="text" name="SmestajnaJedinicaId" value="@smestaj.Id" hidden />
+                                                <button type="submit">Rezervisi</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr><td>Smestaj je zauzet</td></tr>
+                            }
+
+                            @if (Session["korisnik"] != null && ((WebProjekat.Models.Korisnik)Session["korisnik"]).Uloga == WebProjekat.Models.Uloga.Menadzer && ((WebProjekat.Models.Korisnik)Session["korisnik"]).Id == ViewBag.Aranzman.MenadzerId)
+                            {
+                                <tr>
+                                    <td>
+                                        <button>Izmeni</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <form action="~/Main/ObrisiSmestajnuJedinicu" method="post">
+                                            <input type="text" name="id" value="@smestaj.Id" hidden />
+                                            <button type="submit">Obrisi</button>
+                                        </form>
+                                    </td>
+                                </tr>
+
+                            }
+                        </table>
+                        <br />
+                    }
+                }
+            }
+            else
+            {
+                <h3>Nema smestajnih jedinica</h3>
+            }
+        }
+        else
+        {
+            <h3>Smestaj je neaktivan.</h3>
+        }
+    }
+}

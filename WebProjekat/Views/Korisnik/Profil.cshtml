@@ -1,0 +1,224 @@
+﻿
+@{
+    ViewBag.Title = "Profil";
+}
+
+<table>
+    <tr>
+        <td>
+            <form action="~/Main/Index">
+                <button type="submit">Main</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Korisnik/Logout">
+                <button>Logout</button>
+            </form>
+        </td>
+
+        @if (Session["korisnik"] != null && ((WebProjekat.Models.Korisnik)Session["korisnik"]).Uloga == WebProjekat.Models.Uloga.Administrator)
+        {
+            WebProjekat.Models.Korisnik admin = (WebProjekat.Models.Korisnik)Session["korisnik"];
+
+            <td>
+                <form action="~/Korisnik/RegistracijaMenadzera">
+                    <button type="submit">Registruj menadzera</button>
+                </form>
+            </td>
+            <td>
+                <form action="~/Korisnik/PrikaziKorisnike" method="get">
+                    <button type="submit">Prikazi korisnike</button>
+                </form>
+            </td>
+        }
+
+        @if (Session["korisnik"] != null && ((WebProjekat.Models.Korisnik)Session["korisnik"]).Uloga == WebProjekat.Models.Uloga.Menadzer)
+        {
+            WebProjekat.Models.Korisnik admin = (WebProjekat.Models.Korisnik)Session["korisnik"];
+
+            <td>
+                <form action="~/Main/PrikaziKreirajAranzman">
+                    <button type="submit">Kreiraj Aranzman</button>
+                </form>
+            </td>
+        }
+    </tr>
+</table>
+
+<h1>Profil</h1>
+
+@if (Session["korisnik"] != null)
+{
+    WebProjekat.Models.Korisnik korisnik = (WebProjekat.Models.Korisnik)Session["korisnik"];
+
+    <form action="~/Korisnik/PotvrdiIzmene" method="post">
+        <input type="text" name="Id" value="@korisnik.Id" hidden />
+        <table>
+            <tr>
+                <td>Korisnicko ime</td>
+                <td><input type="text" name="KorisnickoIme" value="@korisnik.KorisnickoIme" readonly /></td>
+            </tr>
+            <tr>
+                <td>Lozinka</td>
+                <td><input type="text" name="Lozinka" value="@korisnik.Lozinka" /></td>
+            </tr>
+            <tr>
+                <td>Ime</td>
+                <td><input type="text" name="Ime" value="@korisnik.Ime" /></td>
+            </tr>
+            <tr>
+                <td>Prezime</td>
+                <td><input type="text" name="Prezime" value="@korisnik.Prezime" /></td>
+            </tr>
+            <tr>
+                <td>Pol</td>
+                <td><input type="text" name="Pol" value="@korisnik.Pol" readonly /></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" name="Email" value="@korisnik.Email" /></td>
+            </tr>
+            <tr>
+                <td>DatumRodjenja</td>
+                <td><input type="text" name="DatumRodjenja" value="@korisnik.DatumRodjenja" /></td>
+            </tr>
+            <tr>
+                <td>Uloga</td>
+                <td><input type="text" name="Uloga" value="@korisnik.Uloga" readonly /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="submit">Potvrdi izmene</button></td>
+            </tr>
+        </table>
+    </form>
+
+    if (((WebProjekat.Models.Korisnik)Session["korisnik"]).Uloga == WebProjekat.Models.Uloga.Turista)
+    {
+        WebProjekat.Models.Turista turista = (WebProjekat.Models.Turista)Session["korisnik"];
+
+        if (turista.Rezervacije.Count > 0)
+        {
+            <h2>Rezervacije</h2>
+            <table>
+                @foreach (var rezervacija in turista.Rezervacije)
+                {
+                    <tr>
+                        <td>@rezervacija.NazivAranzmana</td>
+                        <td>@rezervacija.LokacijaAranzmana</td>
+                        <td>@rezervacija.DatumPocetka</td>
+                        <td>@rezervacija.DatumZavrsetka</td>
+                        <td>@rezervacija.Cena</td>
+                        <td>@rezervacija.Status</td>
+                        @*<td>@rezervacija.MozeSeOtkazati</td>
+                            <td>@rezervacija.MozeSeKomentarisati</td>*@
+                        @if (@rezervacija.Status == WebProjekat.Models.StatusRezervacije.Aktivna)
+                        {
+                            if (@rezervacija.MozeSeOtkazati)
+                            {
+                                <td>
+                                    <form action="~/Rezervacije/OtkaziRezervaciju" method="post">
+                                        <input type="text" name="Id" value="@rezervacija.Id" hidden />
+                                        <input type="text" name="TuristaId" value="@rezervacija.TuristaId" hidden />
+                                        <input type="text" name="AranzmanId" value="@rezervacija.AranzmanId" hidden />
+                                        <input type="text" name="SmestajnaJedinicaId" value="@rezervacija.SmestajnaJedinicaId" hidden />
+                                        <button type="submit">Otkazi</button>
+                                    </form>
+                                </td>
+                            }
+                            if (@rezervacija.MozeSeKomentarisati)
+                            {
+                                if (!rezervacija.Komentarisano)
+                                {
+                                    <td>
+                                        <form action="~/Rezervacije/KomentarisiAranzman" method="post">
+                                            <input type="text" name="TuristaId" value="@korisnik.Id" hidden />
+                                            <input type="text" name="ApartmanId" value="@rezervacija.AranzmanId" hidden />
+                                            <input type="text" name="RezervacijaId" value="@rezervacija.Id" hidden />
+                                            <input type="text" name="Tekst" placeholder="Komentar" />
+                                            <input type="number" name="Ocena" placeholder="Ocena" />
+                                            <button>Komentarisi</button>
+                                        </form>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td><div>Aranzman je komentarisan.</div></td>
+                                }
+                            }
+                        }
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <h3>Nemate rezervacije.</h3>
+        }
+
+    }
+    if (((WebProjekat.Models.Korisnik)Session["korisnik"]).Uloga == WebProjekat.Models.Uloga.Menadzer)
+    {
+        WebProjekat.Models.Menadzer menadzer = (WebProjekat.Models.Menadzer)Session["korisnik"];
+
+        if (menadzer.Aranzmani.Count > 0)
+        {
+            <h2>Aranzmani</h2>
+            <table>
+                @foreach (var aranzman in menadzer.Aranzmani)
+                {
+                    <tr>
+                        <td>@aranzman.Naziv</td>
+                        <td>@aranzman.Lokacija</td>
+                        <td>@aranzman.DatumPocetka</td>
+                        <td>@aranzman.DatumZavrsetka</td>
+                        @if (@aranzman.Obrisan == false)
+                        {
+                            <td>
+                                <form action="~/Main/Pogledaj" method="get">
+                                    <input name="id" value="@aranzman.Id" hidden />
+                                    <button>Pogledaj</button>
+                                </form>
+                            </td>
+                        }
+                        else
+                        {
+                            <td><div>Aranzman je obrisan.</div></td>
+                            <td>
+                                <form action="~/Main/AktivirajAranzman" method="post">
+                                    <input name="id" value="@aranzman.Id" hidden />
+                                    <button>Aktiviraj</button>
+                                </form>
+                            </td>
+                        }
+                    </tr>
+                }
+            </table>
+
+            List<WebProjekat.Models.Rezervacija> rezervacije = (List<WebProjekat.Models.Rezervacija>)Session["rezervacije"];
+            if (rezervacije.Count > 0)
+            {
+                <h2>Rezervacije</h2>
+                <table>
+                    @foreach (WebProjekat.Models.Rezervacija rezervacija in rezervacije)
+                    {
+                        <tr>
+                            <td>@rezervacija.NazivAranzmana</td>
+                            <td>@rezervacija.LokacijaAranzmana</td>
+                            <td>@rezervacija.DatumPocetka</td>
+                            <td>@rezervacija.DatumZavrsetka</td>
+                            <td>@rezervacija.Cena</td>
+                            <td>@rezervacija.Status</td>
+                        </tr>
+                    }
+                </table>
+            }
+
+        }
+        else
+        {
+            <h3>Nemate aranzmane.</h3>
+        }
+
+    }
+}

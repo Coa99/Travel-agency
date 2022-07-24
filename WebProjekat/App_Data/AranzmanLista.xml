@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAranzman xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Aranzman>
+    <Id>bfe991d4-f54a-48ba-aafc-020744d64b09</Id>
+    <Naziv>Hurghada</Naziv>
+    <Tip>AllInclusive</Tip>
+    <Prevoz>AutobusAvion</Prevoz>
+    <Lokacija>Egipat</Lokacija>
+    <DatumPocetka>2021-07-13T00:00:00</DatumPocetka>
+    <DatumZavrsetka>2021-07-31T00:00:00</DatumZavrsetka>
+    <MestoNalazenja>
+      <Id>ee9c58c6-95a0-466b-8a99-6d6235c25baf</Id>
+      <Adresa>Aerodrom Nikola Tesla</Adresa>
+      <GeografskaSirina>0</GeografskaSirina>
+      <GeografskaDuzina>0</GeografskaDuzina>
+    </MestoNalazenja>
+    <VremeNalazenja>2021-07-13T05:20:00</VremeNalazenja>
+    <MaksimalanBrojPutnika>150</MaksimalanBrojPutnika>
+    <OpisAranzmana>Top destinacija</OpisAranzmana>
+    <OpisPutovanja>Ekskluzivan smestaj</OpisPutovanja>
+    <Slika>Hurghada.jpg</Slika>
+    <Smestaj>
+      <SmestajneJedinice>
+        <SmestajnaJedinica>
+          <Id>e162fa19-6a52-49c0-a5c2-f7e1f414469a</Id>
+          <DozvoljenBrojGostiju>2</DozvoljenBrojGostiju>
+          <DozvoljenBoravakKucnihLjubimaca>false</DozvoljenBoravakKucnihLjubimaca>
+          <Cena>650</Cena>
+          <Obrisan>false</Obrisan>
+          <Slobodan>false</Slobodan>
+          <SmestajId>858f2b6b-ec2b-4506-b90f-fc658fe6f227</SmestajId>
+        </SmestajnaJedinica>
+      </SmestajneJedinice>
+      <Id>858f2b6b-ec2b-4506-b90f-fc658fe6f227</Id>
+      <Tip>Hotel</Tip>
+      <Naziv>Smestaj1</Naziv>
+      <BrojZvezdica>4</BrojZvezdica>
+      <PostojanjeBazena>true</PostojanjeBazena>
+      <PostojanjeSpaCentra>false</PostojanjeSpaCentra>
+      <PrilagodjenoZaOsobeSaInvaliditetom>true</PrilagodjenoZaOsobeSaInvaliditetom>
+      <PostojanjeWiFiKonekcije>true</PostojanjeWiFiKonekcije>
+      <Obrisan>false</Obrisan>
+      <Slobodan>true</Slobodan>
+      <AranzmanId>bfe991d4-f54a-48ba-aafc-020744d64b09</AranzmanId>
+    </Smestaj>
+    <MestoNalazenjaStr>Aerodrom Nikola Tesla</MestoNalazenjaStr>
+    <Obrisan>false</Obrisan>
+    <Slobodan>true</Slobodan>
+    <MenadzerId>11b22860-e517-495e-9608-a4b87e8d3e91</MenadzerId>
+    <Prosao>false</Prosao>
+  </Aranzman>
+  <Aranzman>
+    <Id>70475696-458e-416f-b486-9561182e131f</Id>
+    <Naziv>Ibiza</Naziv>
+    <Tip>AllInclusive</Tip>
+    <Prevoz>AutobusAvion</Prevoz>
+    <Lokacija>Spanija</Lokacija>
+    <DatumPocetka>2021-07-20T00:00:00</DatumPocetka>
+    <DatumZavrsetka>2021-07-30T00:00:00</DatumZavrsetka>
+    <MestoNalazenja>
+      <Id>701c50b6-03ff-41f8-89ea-a186567690a9</Id>
+      <Adresa>Aerodrom Nikola Tesla</Adresa>
+      <GeografskaSirina>0</GeografskaSirina>
+      <GeografskaDuzina>0</GeografskaDuzina>
+    </MestoNalazenja>
+    <VremeNalazenja>2021-07-20T07:50:00</VremeNalazenja>
+    <MaksimalanBrojPutnika>220</MaksimalanBrojPutnika>
+    <OpisAranzmana>Ekskluzivna destinacija</OpisAranzmana>
+    <OpisPutovanja>Top smestaj</OpisPutovanja>
+    <Slika>Ibiza.jpg</Slika>
+    <Smestaj>
+      <SmestajneJedinice>
+        <SmestajnaJedinica>
+          <Id>92894565-04c5-4923-98e4-b9033ac7d955</Id>
+          <DozvoljenBrojGostiju>2</DozvoljenBrojGostiju>
+          <DozvoljenBoravakKucnihLjubimaca>false</DozvoljenBoravakKucnihLjubimaca>
+          <Cena>780</Cena>
+          <Obrisan>false</Obrisan>
+          <Slobodan>true</Slobodan>
+          <SmestajId>8a068557-15e5-46a9-a5ba-d226e46f56eb</SmestajId>
+        </SmestajnaJedinica>
+      </SmestajneJedinice>
+      <Id>8a068557-15e5-46a9-a5ba-d226e46f56eb</Id>
+      <Tip>Hotel</Tip>
+      <Naziv>Smestaj2</Naziv>
+      <BrojZvezdica>5</BrojZvezdica>
+      <PostojanjeBazena>true</PostojanjeBazena>
+      <PostojanjeSpaCentra>true</PostojanjeSpaCentra>
+      <PrilagodjenoZaOsobeSaInvaliditetom>true</PrilagodjenoZaOsobeSaInvaliditetom>
+      <PostojanjeWiFiKonekcije>true</PostojanjeWiFiKonekcije>
+      <Obrisan>false</Obrisan>
+      <Slobodan>true</Slobodan>
+      <AranzmanId>70475696-458e-416f-b486-9561182e131f</AranzmanId>
+    </Smestaj>
+    <MestoNalazenjaStr>Aerodrom Nikola Tesla</MestoNalazenjaStr>
+    <Obrisan>false</Obrisan>
+    <Slobodan>true</Slobodan>
+    <MenadzerId>fd5870ed-9f24-4242-a724-c17dc25d92eb</MenadzerId>
+    <Prosao>false</Prosao>
+  </Aranzman>
+  <Aranzman>
+    <Id>a03f7f47-2c82-4e34-a6af-fc8cb73a6e75</Id>
+    <Naziv>Pefkohori</Naziv>
+    <Tip>NajamApartmana</Tip>
+    <Prevoz>Individualan</Prevoz>
+    <Lokacija>Grcka</Lokacija>
+    <DatumPocetka>2021-06-01T00:00:00</DatumPocetka>
+    <DatumZavrsetka>2021-06-15T00:00:00</DatumZavrsetka>
+    <MestoNalazenja>
+      <Id>2de62889-da79-4ba3-b25d-f26035f14936</Id>
+      <Adresa>Negde u Grckoj</Adresa>
+      <GeografskaSirina>0</GeografskaSirina>
+      <GeografskaDuzina>0</GeografskaDuzina>
+    </MestoNalazenja>
+    <VremeNalazenja>2021-06-01T14:00:00</VremeNalazenja>
+    <MaksimalanBrojPutnika>4</MaksimalanBrojPutnika>
+    <OpisAranzmana>Jako lep aranzman</OpisAranzmana>
+    <OpisPutovanja>Top putovanje</OpisPutovanja>
+    <Slika>Pefkohori.jpg</Slika>
+    <Smestaj>
+      <SmestajneJedinice>
+        <SmestajnaJedinica>
+          <Id>43fb80ac-a138-4cb5-a701-ee914155ec26</Id>
+          <DozvoljenBrojGostiju>4</DozvoljenBrojGostiju>
+          <DozvoljenBoravakKucnihLjubimaca>false</DozvoljenBoravakKucnihLjubimaca>
+          <Cena>170</Cena>
+          <Obrisan>false</Obrisan>
+          <Slobodan>true</Slobodan>
+          <SmestajId>2428c01a-522d-4040-8536-994db4d832b2</SmestajId>
+        </SmestajnaJedinica>
+      </SmestajneJedinice>
+      <Id>2428c01a-522d-4040-8536-994db4d832b2</Id>
+      <Tip>Vila</Tip>
+      <Naziv>grcki smestaj</Naziv>
+      <BrojZvezdica>2</BrojZvezdica>
+      <PostojanjeBazena>false</PostojanjeBazena>
+      <PostojanjeSpaCentra>false</PostojanjeSpaCentra>
+      <PrilagodjenoZaOsobeSaInvaliditetom>false</PrilagodjenoZaOsobeSaInvaliditetom>
+      <PostojanjeWiFiKonekcije>true</PostojanjeWiFiKonekcije>
+      <Obrisan>false</Obrisan>
+      <Slobodan>true</Slobodan>
+      <AranzmanId>a03f7f47-2c82-4e34-a6af-fc8cb73a6e75</AranzmanId>
+    </Smestaj>
+    <MestoNalazenjaStr>Negde u Grckoj</MestoNalazenjaStr>
+    <Obrisan>false</Obrisan>
+    <Slobodan>true</Slobodan>
+    <MenadzerId>11b22860-e517-495e-9608-a4b87e8d3e91</MenadzerId>
+    <Prosao>true</Prosao>
+  </Aranzman>
+</ArrayOfAranzman>

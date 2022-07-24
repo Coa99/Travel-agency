@@ -1,0 +1,312 @@
+﻿
+@{
+    ViewBag.Title = "MainView";
+}
+
+@if (Session["korisnik"] == null)
+{
+    <table>
+        <tr>
+            <td>
+                <form action="~/Korisnik/Logovanje">
+                    <button>Login</button>
+                </form>
+            </td>
+            <td>
+                <form action="~/Korisnik/Registracija">
+                    <button>Registracija</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+}
+else
+{
+    <table>
+        <tr>
+            <td>
+                <form action="~/Korisnik/Logout">
+                    <button>Logout</button>
+                </form>
+            </td>
+            <td>
+                <form action="~/Korisnik/Profil">
+                    <button>Profil</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+}
+<br />
+<form action="~/Main/PretraziAranzmane" method="post">
+    <table border="1">
+        <tr><td colspan="8"><b>Pretraga aranzmana</b></td></tr>
+        <tr>
+            <td>Datum pocetka-min></td>
+            <td>Datum pocetka-max></td>
+            <td>Datum zavrsetka-min></td>
+            <td>Datum zavrsetka-max></td>
+            <td>Tip prevoza></td>
+            <td>Tip aranzmana></td>
+            <td>Naziv></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><input type="date" name="minPocetak" /></td>
+            <td><input type="date" name="maxPocetak" /></td>
+            <td><input type="date" name="minKraj" /></td>
+            <td><input type="date" name="maxKraj" /></td>
+            <td>
+                <select class="form-control" id="tipPrevoza" name="tipPrevoza">
+                    <option value="IskljucenoIzPretrage">IskljucenoIzPretrage</option>
+                    <option value="Autobus">Autobus</option>
+                    <option value="Avion">Avion</option>
+                    <option value="AutobusAvion">Autobus & Avion</option>
+                    <option value="Individualan">Individualan</option>
+                    <option value="Ostalo">Drugo</option>
+                </select>
+            </td>
+            <td>
+                <select class="form-control" id="tipAranzmana" name="tipAranzmana">
+                    <option value="IskljucenoIzPretrage">IskljucenoIzPretrage</option>
+                    <option value="NocenjeSaDoruckom">Nocenje Sa Doruckom</option>
+                    <option value="Polupansion">Polupansion</option>
+                    <option value="PunPansion">Pun Pansion</option>
+                    <option value="AllInclusive">All Inclusive</option>
+                    <option value="NajamApartmana">Najam Apartmana</option>
+                </select>
+            </td>
+            <td><input type="text" name="naziv" /></td>
+            <td><button type="submit">Pretrazi</button></td>
+        </tr>
+    </table>
+</form>
+<form action="~/Main/Index" method="get">
+    <button>Ponisti filtere</button>
+</form>
+<br />
+<table border="1">
+    <tr>
+        <td colspan="6"><b>Sortiranje aranzmana</b></td>
+    </tr>
+    <tr>
+        <td colspan="2">Datum pocetka</td>
+        <td colspan="2">Datum zavrsetka</td>
+        <td colspan="2">Naziv</td>
+    </tr>
+    <tr>
+        <td>
+            <form action="~/Main/Sortiraj" method="get">
+                <input type="text" name="nacin" value="DP_Rastuce" hidden />
+                <button type="submit">Rastuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Main/Sortiraj" method="get">
+                <input type="text" name="nacin" value="DP_Opadajuce" hidden />
+                <button type="submit">Opadajuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Main/Sortiraj" method="get">
+                <input type="text" name="nacin" value="DZ_Rastuce" hidden />
+                <button type="submit">Rastuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Main/Sortiraj" method="get">
+                <input type="text" name="nacin" value="DZ_Opadajuce" hidden />
+                <button type="submit">Opadajuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Main/Sortiraj" method="get">
+                <input type="text" name="nacin" value="Naziv_Rastuce" hidden />
+                <button type="submit">Rastuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Main/Sortiraj" method="get">
+                <input type="text" name="nacin" value="Naziv_Opadajuce" hidden />
+                <button type="submit">Opadajuce</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<br />
+<form action="~/Main/PretraziSmestaje" method="post">
+    <table border="1">
+        <tr>
+            <td colspan="6"><b>Pretraga smestaja</b></td>
+        </tr>
+        <tr>
+            <td>Tip</td>
+            <td>Naziv</td>
+            <td>Postojanje bazena</td>
+            <td>Postojanje spa centra</td>
+            <td>Prilagodjeno za osobe sa invaliditetom</td>
+            <td>Postoji wifi</td>
+        </tr>
+        <tr>
+            <td>
+                <select class="form-control" id="tip" name="tip">
+                    <option value="IskljucenoIzPretrage">IskljucenoIzPretrage</option>
+                    <option value="Hotel">Hotel</option>
+                    <option value="Motel">Motel</option>
+                    <option value="Vila">Vila</option>
+                </select>
+            </td>
+            <td><input type="text" name="naziv" /></td>
+            <td>
+                <select name="bazen">
+                    <option>IskljucenoIzPretrage</option>
+                    <option value="true">Da</option>
+                    <option value="false">Ne</option>
+                </select>
+            </td>
+            <td>
+                <select class="form-control" id="spa" name="spa">
+                    <option>IskljucenoIzPretrage</option>
+                    <option value="true">Da</option>
+                    <option value="false">Ne</option>
+                </select>
+            </td>
+            <td>
+                <select class="form-control" id="osobeSaInvaliditetom" name="osobeSaInvaliditetom">
+                    <option>IskljucenoIzPretrage</option>
+                    <option value="true">Da</option>
+                    <option value="false">Ne</option>
+                </select>
+            </td>
+            <td>
+                <select class="form-control" id="wifi" name="wifi">
+                    <option>IskljucenoIzPretrage</option>
+                    <option value="true">Da</option>
+                    <option value="false">Ne</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6"><button type="submit">Pretrazi</button></td>
+        </tr>
+    </table>
+</form>
+<br />
+<table border="1">
+    <tr><td colspan="6"><b>Sortiranje smestaja</b></td></tr>
+    <tr>
+        <td colspan="2">Naziv</td>
+        <td colspan="2">Broj smestajnih jedinica</td>
+        <td colspan="2">Broj slobodnih smestajnih jedinica</td>
+    </tr>
+    <tr>
+        <td>
+            <form action="~/Main/SortirajSmestaje" method="get">
+                <input type="text" name="nacin" value="naziv_Rastuce" hidden />
+                <button type="submit">Rastuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Main/SortirajSmestaje" method="get">
+                <input type="text" name="nacin" value="naziv_Opadajuce" hidden />
+                <button type="submit">Opadajuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Main/SortirajSmestaje" method="get">
+                <input type="text" name="nacin" value="bs_Rastuce" hidden />
+                <button type="submit">Rastuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Main/SortirajSmestaje" method="get">
+                <input type="text" name="nacin" value="bs_Opadajuce" hidden />
+                <button type="submit">Opadajuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Main/SortirajSmestaje" method="get">
+                <input type="text" name="nacin" value="bss_Rastuce" hidden />
+                <button type="submit">Rastuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Main/SortirajSmestaje" method="get">
+                <input type="text" name="nacin" value="bss_Opadajuce" hidden />
+                <button type="submit">Opadajuce</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<br />
+<table border="1">
+    <tr>
+        <td colspan="7">
+            <h1>Predstojeci aranzmani</h1>
+        </td>
+    </tr>
+    @foreach (var arr in ((List<WebProjekat.Models.Aranzman>)Session["a"]))
+    {
+        if (arr.Obrisan == false && arr.Prosao == false)
+        {
+            <tr>
+                <td>@arr.Naziv</td>
+                <td>@arr.Tip</td>
+                <td>@arr.Prevoz</td>
+                <td>@arr.Lokacija</td>
+                <td>@arr.DatumPocetka</td>
+                <td>@arr.DatumZavrsetka</td>
+                <td><img width="100" src="~/Images/@arr.Slika" /></td>
+                <td>
+                    <form action="~/Main/Pogledaj" method="get">
+                        <input name="id" value="@arr.Id" hidden />
+                        <button>Pogledaj</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    }
+</table>
+<br />
+<table border="1">
+    <tr>
+        <td colspan="7">
+            <h1>Prosli aranzmani</h1>
+        </td>
+    </tr>
+    @foreach (var arr in ((List<WebProjekat.Models.Aranzman>)Session["a"]))
+    {
+        if (arr.Obrisan == false && arr.Prosao == true)
+        {
+    <tr>
+        <td>@arr.Naziv</td>
+        <td>@arr.Tip</td>
+        <td>@arr.Prevoz</td>
+        <td>@arr.Lokacija</td>
+        <td>@arr.DatumPocetka</td>
+        <td>@arr.DatumZavrsetka</td>
+        <td><img width="100" src="~/Images/@arr.Slika" /></td>
+        <td>
+            <form action="~/Main/Pogledaj" method="get">
+                <input name="id" value="@arr.Id" hidden />
+                <button>Pogledaj</button>
+            </form>
+        </td>
+    </tr>
+        }
+    }
+</table>
+
+
+@*@if ((WebApp.Models.Korisnik)Session["korisnik"] != null)
+    {
+        if (((WebApp.Models.Korisnik)Session["korisnik"]).Uloga == WebApp.Models.Uloga.Menadzer)
+        {
+            <form action="~/Main/PrikaziKreirajAranzman">
+                <button type="submit">Kreiraj Aranzman</button>
+            </form>
+        }
+    }*@
+
+
+

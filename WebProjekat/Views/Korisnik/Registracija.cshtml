@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Registracija";
+}
+
+<form action="~/Main/Index">
+    <button type="submit">Pocetna stranica.</button>
+</form>
+
+<h2>Registracija</h2>
+
+<form action="~/Korisnik/RegistrovanjeKorisnika" method="post">
+    <table>
+        <tr>
+            <td>Korisnicko ime</td>
+            <td><input type="text" name="KorisnickoIme" /></td>
+        </tr>
+        <tr>
+            <td>Lozinka</td>
+            <td><input type="text" name="Lozinka" /></td>
+        </tr>
+        <tr>
+            <td>Ime</td>
+            <td><input type="text" name="Ime" /></td>
+        </tr>
+        <tr>
+            <td>Prezime</td>
+            <td><input type="text" name="Prezime" /></td>
+        </tr>
+        <tr>
+            <td>Pol</td>
+            <td>
+                Male: <input checked="checked"
+                             id="Pol"
+                             name="Pol"
+                             type="radio"
+                             value="Muski" />
+
+                Female: <input id="Pol"
+                               name="Pol"
+                               type="radio"
+                               value="Zenski" />
+            </td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="email" name="Email" /></td>
+        </tr>
+        <tr>
+            <td>DatumRodjenja</td>
+            <td><input type="date" name="DatumRodjenja" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit">Registracija</button></td>
+        </tr>
+    </table>
+</form>

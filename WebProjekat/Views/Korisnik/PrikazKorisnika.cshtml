@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewBag.Title = "PrikazKorisnika";
+}
+
+<table>
+    <tr>
+        <td>
+            <form action="~/Main/Index">
+                <button type="submit">Main</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Korisnik/Logout">
+                <button>Logout</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<br />
+
+<form action="~/Korisnik/PretraziKorisnike" method="post">
+    <table border="1">
+        <tr><td colspan="3"><b>Pretraga</b></td></tr>
+        <tr>
+            <td>Ime</td>
+            <td>Prezime</td>
+            <td>Uloga</td>
+        </tr>
+        <tr>
+            <td><input type="text" name="ime" /></td>
+            <td><input type="text" name="prezime" /></td>
+            <td>
+                <select class="form-control" id="uloga" name="uloga">
+                    <option value="IskljucenoIzPretrage">IskljucenoIzPretrage</option>
+                    <option value="Turista">Turista</option>
+                    <option value="Menadzer">Menadzer</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3"><button type="submit">Pretrazi</button></td>
+        </tr>
+    </table>
+</form>
+<form action="~/Korisnik/PrikaziKorisnike" method="get">
+    <button>Ponisti filtere</button>
+</form>
+<br />
+<table border="1">
+    <tr>
+        <td colspan="6">
+            <b>Sortiranje</b>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">Ime</td>
+        <td colspan="2">Prezime</td>
+        <td colspan="2">Uloga</td>
+    </tr>
+    <tr>
+        <td>
+            <form action="~/Korisnik/Sortiraj" method="get">
+                <input type="text" name="nacin" value="ime_Rastuce" hidden />
+                <button type="submit">Rastuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Korisnik/Sortiraj" method="get">
+                <input type="text" name="nacin" value="ime_Opadajuce" hidden />
+                <button type="submit">Opadajuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Korisnik/Sortiraj" method="get">
+                <input type="text" name="nacin" value="prezime_Rastuce" hidden />
+                <button type="submit">Rastuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Korisnik/Sortiraj" method="get">
+                <input type="text" name="nacin" value="prezime_Opadajuce" hidden />
+                <button type="submit">Opadajuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Korisnik/Sortiraj" method="get">
+                <input type="text" name="nacin" value="uloga_Rastuce" hidden />
+                <button type="submit">Rastuce</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Korisnik/Sortiraj" method="get">
+                <input type="text" name="nacin" value="uloga_Opadajuce" hidden />
+                <button type="submit">Opadajuce</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<br />
+<table>
+    <tr>
+        <td colspan="10">
+            <h1>PrikazKorisnika</h1>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="10"><b>Menadzeri</b></td>
+    </tr>
+    @foreach (WebProjekat.Models.Menadzer menadzer in (List<WebProjekat.Models.Menadzer>)Session["menadzeri"])
+    {
+        <tr>
+            <td>@menadzer.KorisnickoIme</td>
+            <td>@menadzer.Lozinka</td>
+            <td>@menadzer.Ime</td>
+            <td>@menadzer.Prezime</td>
+            <td>@menadzer.Pol</td>
+            <td>@menadzer.Email</td>
+            <td>@menadzer.DatumRodjenja</td>
+            <td colspan="3">@menadzer.Uloga</td>
+        </tr>
+    }
+    <tr><td colspan="10"></td></tr>
+    <tr>
+        <td colspan="10"><b>Turisti</b></td>
+    </tr>
+    @foreach (WebProjekat.Models.Turista turista in (List<WebProjekat.Models.Turista>)Session["turisti"])
+    {
+        <tr>
+            <td>@turista.KorisnickoIme</td>
+            <td>@turista.Lozinka</td>
+            <td>@turista.Ime</td>
+            <td>@turista.Prezime</td>
+            <td>@turista.Pol</td>
+            <td>@turista.Email</td>
+            <td>@turista.DatumRodjenja</td>
+            <td>@turista.Uloga</td>
+            @if (turista.BrojOtkazivanja >= 2)
+            {
+                if (!turista.Blokiran)
+                {
+                    <td><div>Korisnik je sumnjiv!</div></td>
+                    <td>
+                        <form action="~/Korisnik/BlokirajKorisnika" method="post">
+                            <input type="text" name="id" value="@turista.Id" hidden />
+                            <button type="submit">Blokiraj</button>
+                        </form>
+                    </td>
+                }
+                else
+                {
+                    <td><div>Korisnik je blokiran.</div></td>
+                }
+            }
+        </tr>
+    }
+</table>

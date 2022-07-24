@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Logovanje";
+}
+
+<table>
+    <tr>
+        <td>
+            <form action="~/Korisnik/Registracija">
+                <button type="submit">Nemas profil? Registruj se.</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Main/Index">
+                <button type="submit">Pocetna stranica.</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+
+<h2>Logovanje</h2>
+
+<form action="~/Korisnik/LogovanjeKorisnika" method="post">
+    <table>
+        <tr>
+            <td>Korisnicko ime</td>
+            <td><input type="text" name="KorisnickoIme" /></td>
+        </tr>
+        <tr>
+            <td>Lozinka</td>
+            <td><input type="password" name="Lozinka" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit">Login</button></td>
+        </tr>
+    </table>
+</form>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfKorisnik xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Korisnik>
+    <Id>1</Id>
+    <KorisnickoIme>a1</KorisnickoIme>
+    <Lozinka>pass</Lozinka>
+    <Ime>Franc</Ime>
+    <Prezime>Kafka</Prezime>
+    <Pol>Muski</Pol>
+    <Email>fk@gmail.com</Email>
+    <DatumRodjenja>1883-07-03T00:00:00</DatumRodjenja>
+    <Uloga>Administrator</Uloga>
+  </Korisnik>
+  <Korisnik>
+    <Id>2</Id>
+    <KorisnickoIme>a2</KorisnickoIme>
+    <Lozinka>pass</Lozinka>
+    <Ime>Desanka</Ime>
+    <Prezime>Maksimovic</Prezime>
+    <Pol>Zenski</Pol>
+    <Email>dm@gmail.com</Email>
+    <DatumRodjenja>1896-05-16T00:00:00</DatumRodjenja>
+    <Uloga>Administrator</Uloga>
+  </Korisnik>
+</ArrayOfKorisnik>

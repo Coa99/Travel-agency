@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "RegistracijaMenadzera";
+}
+
+<table>
+    <tr>
+        <td>
+            <form action="~/Main/Index">
+                <button type="submit">Main</button>
+            </form>
+        </td>
+        <td>
+            <form action="~/Korisnik/Logout">
+                <button>Logout</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+@if (Session["korisnik"] != null && ((WebProjekat.Models.Korisnik)Session["korisnik"]).Uloga == WebProjekat.Models.Uloga.Administrator)
+{
+    <h2>RegistracijaMenadzera</h2>
+
+    <form action="~/Korisnik/RegistrujMenadzera" method="post">
+        <table>
+            <tr>
+                <td>Korisnicko ime</td>
+                <td><input type="text" name="KorisnickoIme" /></td>
+            </tr>
+            <tr>
+                <td>Lozinka</td>
+                <td><input type="text" name="Lozinka" /></td>
+            </tr>
+            <tr>
+                <td>Ime</td>
+                <td><input type="text" name="Ime" /></td>
+            </tr>
+            <tr>
+                <td>Prezime</td>
+                <td><input type="text" name="Prezime" /></td>
+            </tr>
+            <tr>
+                <td>Pol</td>
+                <td>
+                    Male: <input checked="checked"
+                                 id="Pol"
+                                 name="Pol"
+                                 type="radio"
+                                 value="Muski" />
+
+                    Female: <input id="Pol"
+                                   name="Pol"
+                                   type="radio"
+                                   value="Zenski" />
+                </td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="Email" /></td>
+            </tr>
+            <tr>
+                <td>DatumRodjenja</td>
+                <td><input type="date" name="DatumRodjenja" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="submit">Registruj menadzera</button></td>
+            </tr>
+        </table>
+    </form>
+}
+
